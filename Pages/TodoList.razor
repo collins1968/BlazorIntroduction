@@ -25,7 +25,15 @@
     }
     <div>
     </div>
-    <AddTodo OnAddTodo="AddTodo" OnEditTodo="EditTodo"  EditTodoProp="selectedTodo" />
+    @if (selectedTodo != null)
+    {
+        <AddTodo OnEditTodo="EditTodo" EditTodoProp="selectedTodo" />
+    }
+    else
+    {
+        <AddTodo OnAddTodo="AddTodo" OnEditTodo="EditTodo" />
+    }
+    @*<AddTodo OnAddTodo="AddTodo" OnEditTodo="EditTodo"  EditTodoProp="selectedTodo" />*@
 </div>
 
 @code {

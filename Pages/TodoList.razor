@@ -1,0 +1,77 @@
+﻿@page "/"
+
+<div>
+   <div class="card-header">
+        <h1>Todo List</h1>
+    </div>
+
+    @if(todos.Count == 0)
+    {
+        <p class="">No todos found</p>
+    }
+    else
+    {
+        <div class="card-body">
+            <div class="row">
+                @foreach (var todo in todos)
+                {
+
+                    <SingleTodo tododto=" todo" OnRemoveTodo="RemoveTodo" OnEditTodo="EditTodo" />
+
+                    @*<h1>@todo.Title</h1>*@
+                }
+            </div>
+        </div>
+    }
+    <div>
+    </div>
+    <AddTodo OnAddTodo="AddTodo" OnEditTodo="EditTodo"  EditTodoProp="selectedTodo" />
+</div>
+
+@code {
+    private List<TodoDto> todos = new List<TodoDto>()
+    {
+        new TodoDto {
+            Id = Guid.NewGuid(),
+            Title = "Todo 1",
+            Description = "Description 1",
+            Priority = "Low",
+            IsDone = false,
+            Created = DateTime.Now
+        },
+        new TodoDto {
+            Id = Guid.NewGuid(),
+            Title = "Todo 1",
+            Description = "Description 1",
+            Priority = "Low",
+            IsDone = false,
+            Created = DateTime.Now
+        },
+        new TodoDto {
+            Id = Guid.NewGuid(),
+            Title = "Todo 1",
+            Description = "Description 1",
+            Priority = "Low",
+            IsDone = false,
+            Created = DateTime.Now
+        }
+        };
+    //public TodoDto editTod = new();
+
+    public void AddTodo (TodoDto todo)
+    {
+        this.todos.Add(todo);
+    }
+    private TodoDto selectedTodo;
+
+    public void EditTodo (TodoDto todo)
+    {
+        selectedTodo = todo;
+    }
+        public void RemoveTodo (Guid id)
+        {
+            this.todos.RemoveAll(t => t.Id == id);
+        }
+
+    }
+
